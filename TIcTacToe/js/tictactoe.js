@@ -1,3 +1,4 @@
+//comment
 // this variable keeps track of whose turn it is.
 let activePlayer = "X";
 //this array stores an array of moves. We use this to determine win conditions
@@ -36,7 +37,7 @@ function placeXOrO(squareNumber) {
 
 
         //this function plays placement sound
-        Audio('./media/place.mp3');
+        audio('./media/place.mp3');
         //this condition checks to see if it is computers turn
         if(activePlayer === "O") {
             //this function disables clicking for computer choice
@@ -51,11 +52,11 @@ function placeXOrO(squareNumber) {
     //this function results in a random square being selected
     function computersTurn() {
         //this boolean is needed for our while loop
-        let sucess = false;
+        let success = false;
         //this variable stores a random number 0-8
         let pickASquare;
         //this condition allows our while loop to keep trying if a square is selected already
-        while(!sucess) {
+        while(!success) {
             //a random number between 0 and 8 is selected
             pickASquare = String(Math.floor(Math.random() * 9));
             //if the random number evaluated returns true, the square hasn't been selected yet
@@ -75,9 +76,9 @@ function checkWinConditions() {
     //X 0, 1, 2 condition
     if     (arrayIncludes('0X', '1X', '2X')) {drawWinLine(50, 100, 558, 100) }
     //X 3, 4, 5 condition
-    else if (arrayIncludes('3X', '4x', '5x')) {drawWinLine(50, 304, 558, 304) }
+    else if (arrayIncludes('3X', '4X', '5X')) {drawWinLine(50, 304, 558, 304) }
     //X 6, 7, 8 condition
-    else if (arrayIncludes('6x', '7x', '8x')) {drawWinLine(50, 508, 558, 508) }
+    else if (arrayIncludes('6X', '7X', '8X')) {drawWinLine(50, 508, 558, 508) }
     //X 0, 3, 6 condition
     else if (arrayIncludes('0X', '3X', '6X')) {drawWinLine(100, 50, 100, 558) } 
     //X 1, 4, 7 condition 
@@ -112,10 +113,6 @@ function checkWinConditions() {
         //this function sets a .3 second timer before the resetGame is called
         setTimeout(function () {resetGame(); }, 1000);
     }
-
-
-
-
     //this function checks if an array includes 3 strings. It is used to check for 
     //each win condition
     function arrayIncludes(squareA, squareB, squareC) {
@@ -165,47 +162,42 @@ function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
         y = y1;
 
 
-
-
-}
-
-//this function interacts with the canvas
-function animateLineDrawing () {
-    //this variable creates a loop
-    const animationLoop = requestAnimationFrame(animateLineDrawing);
-    //this method clearss content from last loop iteration\
-    c.clearRect(0, 0, 608, 608)
-    //this method starts a new path
-    c.beginPath() ;
-    //this method moves us to a starting point for our line
-    c.moveTo(x1, y1)
-    //this method indicates the end point in our line
-    c.lineTo(x, y)
-    //this method ses the width of our line
-    c.line.width = 10; 
-    //this method sets the color of our line
-    c.strokeStyle = rgba(70, 255, 33, .8);
-    //this method draws everything we laid out above
-    c.stroke();
-    //this condition checks if we've reached the endpoint
-    if (x1 <= x2 && y1 <= y2) {
-        //this condition adds 10 to the previous end x point
-        if (x < x2) {x += 10; }
-        //this condition addes 10 to the previous end y point
-        if (y < y2) {y += 10 ;} 
-        //this condtition cancels our animation loop
-        //if we've reached the end points
-        if (x >= x2 && y >= y2) { cancelAnimationFrame(animationLoop); }
+    //this function interacts with the canvas
+    function animateLineDrawing () {
+        //this variable creates a loop
+        const animationLoop = requestAnimationFrame(animateLineDrawing);
+        //this method clearss content from last loop iteration\
+        c.clearRect(0, 0, 608, 608)
+        //this method starts a new path
+        c.beginPath() ;
+        //this method moves us to a starting point for our line
+        c.moveTo(x1, y1)
+        //this method indicates the end point in our line
+        c.lineTo(x, y)
+        //this method ses the width of our line
+        c.lineWidth = 10; 
+        //this method sets the color of our line
+        c.strokeStyle = 'rgba(70, 255, 33, .8)';
+        //this method draws everything we laid out above
+        c.stroke();
+        //this condition checks if we've reached the endpoint
+        if (x1 <= x2 && y1 <= y2) {
+            //this condition adds 10 to the previous end x point
+            if (x < x2) {x += 10; }
+            //this condition addes 10 to the previous end y point
+            if (y < y2) {y += 10 ;} 
+            //this condtition cancels our animation loop
+            //if we've reached the end points
+            if (x >= x2 && y >= y2) { cancelAnimationFrame(animationLoop); }
+        }
+        //this condition is similar to the one above
+        //this is necessary for the 6, 4, 2 win condition
+        if (x1 <= x2 && y1 >= y2) {
+            if (x < x2) { x += 10; }
+            if (y > y2) { y -= 10; }
+            if (x >= x2 && y <= y2) { cancelAnimationFrame(animationLoop); }
+        }
     }
-    //this condition is similar to the one above
-    //this is necessary for the 6, 4, 2 win condition
-    if (x1 <= x2 && Y1 >= y2) {
-        if (x < x2) { x += 10; }
-        if (y > y2) { y-= 10; }
-        if (x >= x2 && y <= y2) { cancelAnimationFrame(animationLoop); }
-    }
-
-
     //this function clears our canvas after our win line is drawn
     function clear() {
         //this line starts our animation loop
@@ -222,7 +214,7 @@ function animateLineDrawing () {
     //this line calls our main animation loop
     animateLineDrawing();
     //this line waits 1 second. Then, clears canvas, restes game and allows clicking again
-    setTimeout(function () {clear(); resetGame(); }, 1000);
+    setTimeout(function () { clear(); resetGame(); }, 1000);
 }
 
 // this function  resets the game in the event of a tie or a win
